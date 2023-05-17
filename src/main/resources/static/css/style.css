@@ -1,0 +1,17 @@
+body{
+background-image:url("/image/hom.png");
+background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.girlPic{
+display: -webkit-box;
+margin-left: auto;
+#float: right;
+width:33%;
+height:100%
+}
+
+.fond{
+color:red;
+}

@@ -3,8 +3,11 @@
 <html>
   <head>
   <meta charset="UTF-8">
+  <link href="webjars/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+   <link href = "css/style.css" rel="stylesheet">
   </head>
   <body>
-    Bienvenue !
+
+    
   </body>
 </html>

@@ -1,14 +1,13 @@
 package com.projet.AppPartageRessource.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +36,14 @@ public class Etudiant extends AbstractEntity {
 
     @Column(name="tel")
     private String tel;
+
+    @OneToMany(mappedBy = "etudiant")
+    private List<Document> documents;
+
+    @ManyToOne
+    @JoinColumn(name = "idFiliere")
+    private Filiere filiere;
+
 
 
 }
