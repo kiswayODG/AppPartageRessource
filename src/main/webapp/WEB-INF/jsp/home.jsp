@@ -7,7 +7,20 @@
    <link href = "css/style.css" rel="stylesheet">
   </head>
   <body>
+    <div class="boite">
 
+        <div class="boite2">
+            <div>
+
+            </div>
+
+            <div>
+            </div>
+        </div>
+
+        <div>
+        </div>
+    </div>
     
   </body>
 </html>

@@ -15,7 +15,7 @@ public class Emprunt extends AbstractEntity{
 
     @ManyToOne
     @JoinColumn(name = "etudiant_id")
-    private Etudiant etudiant;
+    private Utilisateur etudiant;
 
     @ManyToOne
     @JoinColumn(name = "document_id")

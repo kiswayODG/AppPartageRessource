@@ -1,6 +1,5 @@
 package com.projet.AppPartageRessource.dao;
 
-import com.projet.AppPartageRessource.model.Etudiant;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;

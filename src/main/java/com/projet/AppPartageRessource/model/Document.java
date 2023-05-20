@@ -26,5 +26,5 @@ public class Document extends AbstractEntity{
 
     @ManyToOne
     @JoinColumn(name = "idEtudiant")
-    private Etudiant etudiant;
+    private Utilisateur etudiant;
 }

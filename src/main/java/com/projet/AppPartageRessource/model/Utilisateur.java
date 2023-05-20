@@ -8,13 +8,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="etudiantuser")
-public class Etudiant extends AbstractEntity {
+@Table(name="user")
+public class Utilisateur extends AbstractEntity {
 
     @Column(name="ine")
     private String ine;
@@ -34,6 +35,11 @@ public class Etudiant extends AbstractEntity {
     @Column(name="email")
     private String email;
 
+    @Column(name="password")
+    private String password;
+
+    private String passwordConfirm;
+
     @Column(name="tel")
     private String tel;
 
@@ -41,9 +47,12 @@ public class Etudiant extends AbstractEntity {
     private List<Document> documents;
 
     @ManyToOne
-    @JoinColumn(name = "idFiliere")
+    @JoinColumn(name = "filiere_id")
     private Filiere filiere;
 
+    @ManyToMany
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
 
 }
