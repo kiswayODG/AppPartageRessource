@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="user")
+@Table(name="utilisateur")
 public class Utilisateur extends AbstractEntity {
 
     @Column(name="ine")
@@ -26,8 +27,9 @@ public class Utilisateur extends AbstractEntity {
     @Column(name="prenom")
     private String prenom;
 
-    @Column(name="dateNAiss")
-    private Date dateNAiss;
+    @Column(name="dateNaiss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateNaiss;
 
     @Column(name="adress")
     private String adress;
@@ -38,6 +40,7 @@ public class Utilisateur extends AbstractEntity {
     @Column(name="password")
     private String password;
 
+    @Transient
     private String passwordConfirm;
 
     @Column(name="tel")
@@ -53,6 +56,8 @@ public class Utilisateur extends AbstractEntity {
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
 
 
 }

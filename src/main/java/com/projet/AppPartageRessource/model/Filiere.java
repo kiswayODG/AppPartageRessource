@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class Filiere extends AbstractEntity {
 
     @Column(name="code")
-    private Integer code;
+    private String code;
 
     @Column(name="nom")
     private String libelle;

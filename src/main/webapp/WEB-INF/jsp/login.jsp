@@ -1,40 +1,54 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
+ <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+ <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
       <meta charset="utf-8">
-      <title>Log in with your account</title>
-
-      <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
-      <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
+      <title>Connecter votre compte</title>
+      <link href="webjars/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+      <style>
+      .login-form{
+      width: 400px;
+      height: 250px;
+      position: absolute;
+      background-color: black;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      }
+      </style>
   </head>
 
   <body>
 
-    <div class="container">
-      <form method="POST" action="${contextPath}/login" class="form-signin">
-        <h2 class="form-heading">Log in</h2>
 
-        <div class="form-group ${error != null ? 'has-error' : ''}">
-            <span>${message}</span>
-            <input name="username" type="text" class="form-control" placeholder="Username"
+<div class="login-form">
+    <div class="container-fluid">
+      <form method="POST" action="/login" class="form-signin">
+        <h3 class="text-center">Connexion</h3>
+
+        <div class="form-group">
+
+           <c:if test="${not empty error}">
+               <div class="error-message">
+                   ${error} testkjhiuh
+               </div>
+           </c:if>
+
+            <input name="login"  type="text" class="form-control mb-3 mt-4" placeholder="Login (INE)"
                    autofocus="true"/>
-            <input name="password" type="password" class="form-control" placeholder="Password"/>
+            <input name="password"  type="password" class="form-control  mb-3" placeholder="Password"/>
             <span>${error}</span>
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <input type="hidden" path="${_csrf.parameterpath}" value="${_csrf.token}"/>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
-            <h4 class="text-center"><a href="${contextPath}/registration">Create an account</a></h4>
+            <button class="btn btn-dark  mt-3 " type="submit">Se connecter</button>
+           <a href="/registration"> <button class="btn btn-success text-center mt-3 ms-3" path="inscription" type="button" >S'inscrire</button></a>
         </div>
       </form>
     </div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
   </body>
 </html>

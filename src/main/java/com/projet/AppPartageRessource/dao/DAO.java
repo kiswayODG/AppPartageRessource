@@ -3,9 +3,9 @@ package com.projet.AppPartageRessource.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 
 import java.util.List;
+
 
 public class DAO<T> {
 

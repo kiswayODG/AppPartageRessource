@@ -1,11 +1,12 @@
 package com.projet.AppPartageRessource.dao;
 
+
 import com.projet.AppPartageRessource.model.Utilisateur;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class UtilisateurDAO extends DAO<Utilisateur> {
+public interface UtilisateurDAO extends JpaRepository<Utilisateur,Integer>{
 
+    Utilisateur findByNomIgnoreCase(String nom);
 
-    public Utilisateur findByUsername(String username) {
-        return null;
-    }
+    Utilisateur findByIne(String ine);
 }

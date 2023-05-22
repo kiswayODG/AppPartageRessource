@@ -19,7 +19,7 @@ public class Document extends AbstractEntity{
     private String auteurs;
 
     @Column(name="domaine")
-    private String etat;
+    private String domaine;
 
     @Column (name="resume")
     private String resume;
@@ -27,4 +27,12 @@ public class Document extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "idEtudiant")
     private Utilisateur etudiant;
+
+    @ManyToOne
+    @JoinColumn(name = "typeId")
+    private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "statutId")
+    private Statut statut;
 }

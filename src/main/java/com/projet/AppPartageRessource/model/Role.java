@@ -17,7 +17,7 @@ public class Role extends AbstractEntity{
     @Column(name = "libelle")
     private String libelle;
 
-    @ManyToMany(mappedBy = "role")
+    @ManyToMany(mappedBy = "roles")
     private Set<Utilisateur> users;
 
 }

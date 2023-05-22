@@ -1,13 +1,17 @@
 package com.projet.AppPartageRessource.controller;
 
+import com.projet.AppPartageRessource.model.Filiere;
 import com.projet.AppPartageRessource.model.Utilisateur;
 import com.projet.AppPartageRessource.service.UserService;
 import com.projet.AppPartageRessource.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -19,26 +23,30 @@ public class UserController {
 
     @GetMapping("/registration")
     public String registration(Model model) {
-        model.addAttribute("userForm", new Utilisateur());
+        List<Filiere>filieres = userService.filiereList();
+        System.out.println(filieres);
+        model.addAttribute("user", new Utilisateur());
+        model.addAttribute("Listfilieres", filieres);
 
-        return "registration";
+        return "createUser";
     }
 
-    @PostMapping("/enregistrement")
-    public String registration(@ModelAttribute("userForm") Utilisateur userForm, BindingResult bindingResult) {
-        validator.validate(userForm, bindingResult);
+    @PostMapping("/registration")
+    public String registration(@ModelAttribute("user") Utilisateur user, BindingResult bindingResult) {
+        validator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+
+            return "createUser";
         }
+        userService.save(user);
 
-        userService.save(userForm);
-
-        return "redirect:/welcome";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
+
         if (error != null)
             model.addAttribute("error", " Votre login ou mot de passe est invalide.");
 
@@ -47,9 +55,22 @@ public class UserController {
 
         return "login";
     }
+    
+    @RequestMapping(value="/login", method = RequestMethod.POST)
+    public String checkLogin(Model model ,@RequestParam(name="login",required = false) String login, @RequestParam(name="password",required = false) String password){
 
-    @GetMapping({"/dashboard"})
+    	if(userService.authentifier(login,password)) {
+    		return "redirect:/success";
+    	} else {
+    		model.addAttribute("error","Mot de passe ou login incorrect");
+            return "redirect:/login";
+    	}
+    	
+    }
+
+    @GetMapping("/success")
     public String welcome(Model model) {
-        return "dashboard";
+
+        return "accueil";
     }
 }
