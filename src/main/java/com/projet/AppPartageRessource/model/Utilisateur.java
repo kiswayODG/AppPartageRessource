@@ -46,8 +46,6 @@ public class Utilisateur extends AbstractEntity {
     @Column(name="tel")
     private String tel;
 
-    @OneToMany(mappedBy = "etudiant")
-    private List<Document> documents;
 
     @ManyToOne
     @JoinColumn(name = "filiere_id")
@@ -57,6 +55,8 @@ public class Utilisateur extends AbstractEntity {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @Column(name="etat")
+    private String online ="N";
 
 
 

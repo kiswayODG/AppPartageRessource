@@ -24,6 +24,9 @@ public class Document extends AbstractEntity{
     @Column (name="resume")
     private String resume;
 
+    @Column (name="etat")
+    private String etat;
+
     @ManyToOne
     @JoinColumn(name = "idEtudiant")
     private Utilisateur etudiant;

@@ -4,10 +4,10 @@ import com.projet.AppPartageRessource.model.Filiere;
 import com.projet.AppPartageRessource.model.Utilisateur;
 import com.projet.AppPartageRessource.service.UserService;
 import com.projet.AppPartageRessource.validator.UserValidator;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +32,11 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") Utilisateur user, BindingResult bindingResult) {
+    public String registration(@ModelAttribute("user") Utilisateur user, BindingResult bindingResult,Model model) {
         validator.validate(user, bindingResult);
 
         if (bindingResult.hasErrors()) {
-
+             model.addAttribute("errors",bindingResult.getAllErrors());
             return "createUser";
         }
         userService.save(user);
@@ -57,20 +57,42 @@ public class UserController {
     }
     
     @RequestMapping(value="/login", method = RequestMethod.POST)
-    public String checkLogin(Model model ,@RequestParam(name="login",required = false) String login, @RequestParam(name="password",required = false) String password){
-
+    public String checkLogin( HttpSession session,Model model ,/*RedirectAttributes rattrs,*/ @RequestParam(name="login",required = false) String login, @RequestParam(name="password",required = false) String password){
     	if(userService.authentifier(login,password)) {
-    		return "redirect:/success";
+
+            Utilisateur userLogged = userService.findUserByIne(login);
+            //rattrs.addAttribute("loggedInUser", userLogged);
+           session.setAttribute("loggedInUser", userLogged);
+    		return "redirect:/accueil";
     	} else {
     		model.addAttribute("error","Mot de passe ou login incorrect");
-            return "redirect:/login";
+            return "login";
     	}
     	
     }
 
-    @GetMapping("/success")
-    public String welcome(Model model) {
+    @RequestMapping(value="/logOut", method = RequestMethod.GET)
+    public String seDeconnecter(Model model , @RequestParam(name="login",required = false) String login, @RequestParam(name="password",required = false) String password){
 
+//        if(userService.authentifier(login,password)) {
+//            Utilisateur userLogged = userService.findUserByIne(login);
+//            System.out.println(userLogged);
+//            model.addAttribute("loggedInUser", userLogged);
+//            return "accueil";
+//        } else {
+          //  model.addAttribute("error","Mot de passe ou login incorrect");
+            return "redirect:/login";
+      //  }
+
+    }
+
+
+
+    @RequestMapping(value = "/accueil", method = RequestMethod.GET)
+    public String welcome(Model model, HttpSession session ) {
+        model.addAttribute("loggedInUser",session.getAttribute("loggedInUser"));
         return "accueil";
     }
+
+
 }
