@@ -11,8 +11,13 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Soft UI Dashboard by Creative Tim
+    Yaam wek-re
   </title>
+  <style>
+  input[disabled] {
+  opacity: 0.4;
+  }
+  </style>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -23,6 +28,8 @@
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+
+  <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -116,7 +123,7 @@
                  </g>
                </svg>
              </div>
-             <span class="nav-link-text ms-1">Autres</span>
+             <span class="nav-link-text ms-1">Documents archivés</span>
            </a>
          </li>
          <li class="nav-item mt-3">
@@ -311,8 +318,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive  p-0">
-               <button type="button" class="btn btn-success text-xs ms-4" data-toggle="modal" data-target="#createDoc"
-               >
+               <button type="button" class="btn btn-success text-xs ms-4 mt-2" data-toggle="modal" data-target="#createDoc">
                Ajouter</button>
                 <table class="table align-items-center mb-0" id="dataTable" >
                   <thead>
@@ -361,7 +367,7 @@
                       <td class="center">
                         <button type="button" class="btn btn-warning  text-xs">Annuler </button>
                         <button type="button" class="btn btn-primary  text-xs" data-toggle="modal" data-target="#updateDoc_${doc.id}">Editer </button>
-                        <button type="button" class="btn btn-danger text-xs" data-toggle="modal" data-target="#retrait_${doc.id}">Retirer </button>
+                        <button type="button" class="btn btn-danger text-xs" data-toggle="modal" data-target="#retrait_${doc.id}" ${doc.statut == "Archivé" ? "disabled" : ""}>Retirer </button>
                         <input type="hidden" id="id" value="">
 
                       </td>
@@ -381,6 +387,10 @@
                               <button data-dismiss="modal" >x</button>
                             </div>
                             <div class="modal-body">
+
+                              <div class="form-group mb-3">
+                                <form:input  class="form-control" autofocus="true" path="id" required="true" value="${doc.id}" hidden="true"/>
+                              </div>
 
                               <div class="form-group mb-3">
                                 <form:input  class="form-control" autofocus="true" path="titre" required="true" value="${doc.titre}"/>
@@ -439,7 +449,7 @@
                             </div>
                             <div class="modal-footer">
                               <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                              <button class="btn btn-success" type="submit">Valider</button>
+                              <button class="btn btn-success" type="submit" name="createOrUpdate" value="update">Valider</button>
                             </div>
                           </div>
                         </form:form>
@@ -450,19 +460,21 @@
                     <div class="modal fade" id="retrait_${doc.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
-                          <form action="#" method="POST">
+                          <form:form method="POST" modelAttribute="doc">
                           <div class="modal-header">
                             <h5 class="modal-title" id="delModal">Retrait de document</h5>
                             <button type="button"  data-dismiss="modal">x</button>
                           </div>
                           <div class="modal-body">
+                            <input type="text" name="doc_id" value="${doc.id}" hidden="true" class="form-control"/>
+
                             <p>Voulez-vous vraiment rétirer ce document du grand public? </p>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-danger">Retirer</button>
+                            <button type="submit" class="btn btn-danger" name="archive" value="archive">Retirer</button>
                           </div>
-                          </form>
+                          </form:form>
                         </div>
                       </div>
                     </div>
@@ -650,7 +662,7 @@
           aria-hidden="true">
           <div class="modal-dialog" role="document">
 
-           <form:form method="POST"  modelAttribute="doc" class="form-signin">
+            <form:form method="POST"  modelAttribute="doc" class="form-signin">
               <div class="modal-content">
                   <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Ajout de document</h5>
@@ -677,7 +689,7 @@
                 <form:input type="text" path="resume" class="form-control"
                   autofocus="true" required="true" placeholder="Résumé"/>
                 </div>
-                <form:input type="text" path="etudiant" value="${loggedInUser.id}" class="form-control"/>
+                <form:input type="text" path="etudiant" value="${loggedInUser.id}" class="form-control" hidden="true"/>
                    <div class="form-group   mb-3">
                         <form:select path="type" class="form-control mb-3" required="true">
                                <option value="">Type de document</option>
@@ -696,14 +708,10 @@
 
                     </div>
 
-
-
-
-
                   </div>
                   <div class="modal-footer">
                       <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                       <button class="btn btn-success" type="submit">Valider</button>
+                       <button type="submit" class="btn btn-success"  name="createOrUpdate" value="create">Valider</button>
                   </div>
               </div>
            </form:form>

@@ -35,7 +35,6 @@ public class Document extends AbstractEntity{
     @JoinColumn(name = "typeId")
     private Type type;
 
-    @ManyToOne
-    @JoinColumn(name = "statutId")
+   @Enumerated(EnumType.STRING)
     private Statut statut;
 }

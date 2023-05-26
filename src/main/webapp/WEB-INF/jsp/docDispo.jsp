@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "form" uri = "http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,8 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -113,7 +116,7 @@
                  </g>
                </svg>
              </div>
-             <span class="nav-link-text ms-1">Autres</span>
+             <span class="nav-link-text ms-1">Documents archivés</span>
            </a>
          </li>
          <li class="nav-item mt-3">
@@ -308,84 +311,139 @@
 
                 <table class="table align-items-center mb-0" id="dataTable" >
                   <thead>
-                    <tr>
-                      <th>
+                  <tr>
+                    <th>
                       <p  class="text-secondary font-weight-bolder opacity-8">Titre</p>
                       <p class="text-xs text-secondary mb-0" style="position:relative; bottom:10px;">Autheurs</p>
-                      </th>
+                    </th>
 
-                      <th class="text-secondary font-weight-bolder opacity-8 ps-2">Domaine</th>
-                      <th class="text-center font-weight-bolder opacity-8">Etat</th>
-                      <th class="text-center font-weight-bolder opacity-8">Type</th>
-                      <th class="text-center font-weight-bolder opacity-8">Statut</th>
-                        <th class="text-center font-weight-bolder opacity-8">Actions</th>
-                    </tr>
+                    <th class="text-secondary font-weight-bolder opacity-8 ps-2">Domaine</th>
+                    <th class="text-center font-weight-bolder opacity-8">Etat</th>
+                    <th class="text-center font-weight-bolder opacity-8">Type</th>
+                    <th class="text-center font-weight-bolder opacity-8">Actions</th>
+                  </tr>
                   </thead>
                   <tbody>
+                  <c:forEach items="${documents}" var="doc">
                     <tr>
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
-                            <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
+                            <h6 class="mb-0 text-sm">${doc.titre}</h6>
+                            <p class="text-xs text-secondary mb-0">${doc.auteurs}</p>
                           </div>
                         </div>
                       </td>
                       <td>
                         <div class="d-flex flex-column justify-content-center">
-                           <h6 class="mb-0 ">Santé</h6>
+                          <h6 class="mb-0 ">${doc.domaine}</h6>
                         </div>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Neuf</span>
+                        <span class="badge badge-sm bg-gradient-success">${doc.etat}</span>
                       </td>
                       <td class="align-middle text-center">
-                       <div class="d-flex flex-column justify-content-center">
-                               <h6 class="mb-0 ">PDF</h6>
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 ">${doc.type.libelle}</h6>
                         </div>
                       </td>
-                      <td class="align-middle">
-                        <div class="d-flex flex-column justify-content-center">
-                                     <h6 class="mb-0 ">En circulation</h6>
-                          </div>
-                      </td>
-                       <td class="center">
-                         <button type="button" class="btn btn-primary  text-xs">Emprunter </button>
 
-                        </td>
+                      <td class=" ps-5">
+                        <button type="button" class="btn btn-warning  text-xs " data-toggle="modal" data-target="#empruntDoc_${doc.id}">Emprunter </button>
+
+                      </td>
                     </tr>
 
-                     <tr>
-                                          <td>
-                                            <div class="d-flex px-2 py-1">
-                                              <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
-                                                <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
-                                              </div>
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <div class="d-flex flex-column justify-content-center">
-                                               <h6 class="mb-0 ">Santé</h6>
-                                            </div>
-                                          </td>
-                                          <td class="align-middle text-center text-sm">
-                                              <span class="badge badge-sm bg-gradient-secondary">Usagé</span>
-                                          </td>
-                                          <td class="align-middle text-center">
-                                           <div class="d-flex flex-column justify-content-center">
-                                                   <h6 class="mb-0 ">PDF</h6>
-                                            </div>
-                                          </td>
-                                          <td class="align-middle">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                         <h6 class="mb-0 ">En circulation</h6>
-                                              </div>
-                                          </td>
-                                           <td class="center">
-                                              <button type="button" class="btn btn-primary  text-xs">Emprunter </button>
-                                               </td>
-                                        </tr>
+
+                    <%--  --------------------------------- Modal mise à jour ----------------------------------------------------------%>
+
+                    <div class="modal fade" id="empruntDoc_${doc.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+
+                        <form method="POST"  class="form-signin">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="UpdateModalLabel">Emprunt de document</h5>
+                              <button data-dismiss="modal" >x</button>
+                            </div>
+                            <div class="modal-body text-center">
+
+                              <p><b><u> Propriétaire</u></b></p>
+                              <p>${doc.etudiant.nom}  ${doc.etudiant.prenom}</p>
+
+                              <p>><b><u> Adresse</u></b></p>
+                              <p>${doc.etudiant.email}<br>${doc.etudiant.tel}</p>
+                              <input type="text" value="${doc.id}" name="idDoc" hidden="true"/>
+                            </div>
+
+                            <div class="modal-footer">
+                              <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                              <button class="btn btn-success" type="submit" name="emprunter" value="EM">Valider l'emprunt</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                  </c:forEach>
+
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
+                          <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 ">Santé</h6>
+                      </div>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-success">Neuf</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 ">PDF</h6>
+                      </div>
+                    </td>
+
+                    <td class="ps-5">
+                      <button type="button" class="btn btn-warning  text-xs">Annuler </button>
+
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
+                          <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 ">Santé</h6>
+                      </div>
+                    </td>
+                    <td class="align-middle text-center text-sm">
+                      <span class="badge badge-sm bg-gradient-secondary">Usagé</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 ">PDF</h6>
+                      </div>
+                    </td>
+
+                    <td class="ps-5">
+                      <button type="button" class="btn btn-warning  text-xs">Annuler </button>
+                    </td>
+                  </tr>
 
                   </tbody>
                 </table>
@@ -475,8 +533,10 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+ <script src="vendor/jquery/jquery.min.js"></script>
   <script src="assets/js/core/popper.min.js"></script>
   <script src="assets/js/core/bootstrap.min.js"></script>
+ <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>

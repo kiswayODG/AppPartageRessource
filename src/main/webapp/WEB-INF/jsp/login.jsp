@@ -28,6 +28,8 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
+  <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
+
   <link id="pagestyle" href="assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 </head>
 

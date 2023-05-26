@@ -6,7 +6,7 @@
   <head>
       <meta charset="utf-8">
       <title>Création de compte</title>
-      <link href="webjars/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
 
   </head>
 

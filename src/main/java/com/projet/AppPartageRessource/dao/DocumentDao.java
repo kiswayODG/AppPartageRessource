@@ -1,5 +1,6 @@
 package com.projet.AppPartageRessource.dao;
 import com.projet.AppPartageRessource.model.Document;
+import com.projet.AppPartageRessource.model.Statut;
 import com.projet.AppPartageRessource.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,7 +13,7 @@ public interface DocumentDao extends JpaRepository<Document,Integer> {
 
      List<Document> findByEtudiantNot(Optional<Utilisateur> id);
 
-     List<Document> findByStatut(String statut);
+     List<Document> findByStatutAndEtudiantNot(Statut statut, Utilisateur user);
 
      Document findByStatutAndEtudiant(String statut, Integer id);
 

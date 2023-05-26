@@ -6,13 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "statut")
-public class Statut extends AbstractEntity{
 
-    private String libelle;
+public enum Statut {
 
+   Disponible,
+
+    En_demande,
+    Indisponible,
+    Archivé;
+
+    public static Statut DEFAULT = Disponible;
 }

@@ -51,9 +51,9 @@ public class Utilisateur extends AbstractEntity {
     @JoinColumn(name = "filiere_id")
     private Filiere filiere;
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+//    @ManyToMany
+//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles;
 
     @Column(name="etat")
     private String online ="N";

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @Entity
 @AllArgsConstructor
@@ -20,8 +22,6 @@ public class Emprunt extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name = "document_id")
     private Document doc;
-
-
 
 
 }

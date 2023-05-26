@@ -114,7 +114,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Autres</span>
+            <span class="nav-link-text ms-1">Documents archivés</span>
           </a>
         </li>
         <li class="nav-item mt-3">
