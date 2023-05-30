@@ -197,7 +197,7 @@
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+              <input type="text" id="search-input" class="form-control" placeholder="Type here...">
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -323,7 +323,7 @@
                     <th class="text-center font-weight-bolder opacity-8">Actions</th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="table-body">
                   <c:forEach items="${documents}" var="doc">
                     <tr>
                       <td>
@@ -483,6 +483,18 @@
  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+      $(document).ready(function()
+          {
+              $('#search-input').on('keyup',function()
+              {
+                  var value = $(this).val().toLowerCase();
+                  $('#table-body tr').filter(function() {
+                      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                      });
+                      });
+                      });
+    </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
