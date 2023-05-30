@@ -1,11 +1,5 @@
 package com.projet.AppPartageRessource.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 public enum Statut {
 
@@ -13,7 +7,7 @@ public enum Statut {
 
     En_demande,
     Indisponible,
-    Archivé;
+    Archive;
 
     public static Statut DEFAULT = Disponible;
 }

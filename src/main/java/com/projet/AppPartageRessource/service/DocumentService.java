@@ -19,10 +19,10 @@ public class DocumentService {
     private final UserService uService;
     private final EmpruntService empService;
 
-    public List<Document> findUserDoc(Integer id) {
-        Optional<Utilisateur> user = uService.findUser(id);
+    public List<Document> findUserDoc(Statut statut, Integer id) {
+        Utilisateur user = uService.findUser(id).get();
         if(user != null)
-        return docDao.findByEtudiant(user);
+        return docDao.findByEtudiantAndStatut(user,statut);
         else
             return null;
     }
@@ -57,7 +57,21 @@ public class DocumentService {
 
     public void Archive(Integer docId) {
         Document toSave = docDao.findById(docId).get() ;
-        toSave.setStatut(Statut.Archivé);
+        toSave.setStatut(Statut.Archive);
         docDao.save(toSave);
+    }
+
+    public void DesArchive(Integer docId) {
+        Document toSave = docDao.findById(docId).get() ;
+        toSave.setStatut(Statut.Disponible);
+        docDao.save(toSave);
+    }
+
+    public List<Document> findUserDocArchive(Statut statut, Integer loggedInUser) {
+        Utilisateur user = uService.findUser(loggedInUser).get();
+        if(user != null)
+            return docDao.findByStatutAndEtudiant(statut,user);
+        else
+            return null;
     }
 }

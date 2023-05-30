@@ -15,7 +15,10 @@ public interface DocumentDao extends JpaRepository<Document,Integer> {
 
      List<Document> findByStatutAndEtudiantNot(Statut statut, Utilisateur user);
 
-     Document findByStatutAndEtudiant(String statut, Integer id);
+     List<Document> findByStatutAndEtudiant(Statut statut, Utilisateur user);
 
 
+     List<Document> findByEtudiantNotAndStatut(Utilisateur user, Statut statu);
+
+     List<Document> findByEtudiantAndStatut(Utilisateur user, Statut statut);
 }

@@ -58,6 +58,16 @@ public class Utilisateur extends AbstractEntity {
     @Column(name="etat")
     private String online ="N";
 
+    @PrePersist
+    protected void onCreate() {
+        super.setCreateAt(new Date());
+        super.setUpdateAt(new Date());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        super.setUpdateAt(new Date());
+    }
 
 
 }

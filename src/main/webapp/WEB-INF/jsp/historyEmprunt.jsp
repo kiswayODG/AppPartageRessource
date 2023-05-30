@@ -1,6 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Ulrich
+  Date: 25/05/2023
+  Time: 17:32
+  To change this template use File | Settings | File Templates.
+--%>
+
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="utf-8" />
@@ -8,7 +18,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <title>
-    Soft UI Dashboard by Creative Tim
+    Yaam wek-re
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -55,7 +65,7 @@
            </a>
          </li>
          <li class="nav-item">
-           <a class="nav-link " href="http://localhost:9090/userDocs?id=${loggedInUser.id}">
+           <a class="nav-link " href="/userDocs?id=${loggedInUser.id}">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <title>office</title>
@@ -96,7 +106,7 @@
          </li>
 
          <li class="nav-item">
-           <a class="nav-link  " href="../pages/rtl.html">
+           <a class="nav-link  " href="/archives">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <title>settings</title>
@@ -120,7 +130,7 @@
            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Mon espace emprunt</h6>
          </li>
          <li class="nav-item">
-           <a class="nav-link  " href="../pages/profile.html">
+           <a class="nav-link  " href="/emprunt.enCours">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <title>customer-support</title>
@@ -141,7 +151,7 @@
            </a>
          </li>
          <li class="nav-item">
-           <a class="nav-link active " href="../pages/sign-in.html">
+           <a class="nav-link active " href="/emprunt.historique">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <title>document</title>
@@ -161,7 +171,7 @@
            </a>
          </li>
          <li class="nav-item">
-           <a class="nav-link  " href="../pages/sign-up.html">
+           <a class="nav-link  " href="/logout">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -306,10 +316,35 @@
             <div class="card-body px-0 pt-0 pb-2">
               <div class="table-responsive  p-0">
 
-                <table class="table align-items-center mb-0" id="dataTable" >
-
+                <table class="table align-items-center mb-0" id="dataTable" style="width: 50%;" >
+                  <thead>
+                  <tr>
+                    <th class="text-center font-weight-bolder opacity-8">Date d'emprunt</th>
+                    <th class="text-center font-weight-bolder opacity-8" >Titre</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <c:forEach items="${emprunts}" var="emp">
+                  <tr>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h6 class="mb-0 text-sm">${emp.createAt}</h6>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex flex-column justify-content-center text-center">
+                        <h6 class="mb-0 ">${emp.doc.titre}</h6>
+                      </div>
+                    </td>
+                  </tr>
+                  </c:forEach>
+                  </tbody>
                 </table>
-              </div>
+                <p class="text-center" style="margin-top: 20px"> ${documents.size()==0 ? "Vous n'avez pas d'historique, commencez à emprunter un !!" : ""} </p>
+
+        </div>
             </div>
           </div>
         </div>
@@ -325,6 +360,7 @@
                 </script>
               </div>
             </div>
+          </div>
       </footer>
     </div>
   </main>

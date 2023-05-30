@@ -57,6 +57,11 @@ public class UserService  {
             return false;
         }
     }
+
+    public void deconnexion(Utilisateur user){
+        changeUserLogState(user);
+    }
+
     public void changeUserLogState(Utilisateur user){
         if(user.getOnline().equalsIgnoreCase("N")){
         user.setOnline("O");

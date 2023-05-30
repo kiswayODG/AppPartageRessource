@@ -27,7 +27,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+  <link id="pagestyle" href="assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
   <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -106,7 +106,7 @@
          </li>
 
          <li class="nav-item">
-           <a class="nav-link  " href="../pages/rtl.html">
+           <a class="nav-link  " href="/archives">
              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                  <title>settings</title>
@@ -352,7 +352,7 @@
                         </div>
                       </td>
                       <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">${doc.etat}</span>
+                        <span class="badge badge-sm bg-gradient-${doc.etat == "neuf" ? "success" : "secondary"}">${doc.etat}</span>
                       </td>
                       <td class="align-middle text-center">
                         <div class="d-flex flex-column justify-content-center">
@@ -367,7 +367,7 @@
                       <td class="center">
                         <button type="button" class="btn btn-warning  text-xs">Annuler </button>
                         <button type="button" class="btn btn-primary  text-xs" data-toggle="modal" data-target="#updateDoc_${doc.id}">Editer </button>
-                        <button type="button" class="btn btn-danger text-xs" data-toggle="modal" data-target="#retrait_${doc.id}" ${doc.statut == "Archivé" ? "disabled" : ""}>Retirer </button>
+                        <button type="button" class="btn btn-danger text-xs" data-toggle="modal" data-target="#retrait_${doc.id}" ${doc.statut == "Archive" ? "disabled" : ""}>Retirer </button>
                         <input type="hidden" id="id" value="">
 
                       </td>
@@ -480,76 +480,6 @@
                     </div>
 
                   </c:forEach>
-
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
-                            <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="d-flex flex-column justify-content-center">
-                           <h6 class="mb-0 ">Santé</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Neuf</span>
-                      </td>
-                      <td class="align-middle text-center">
-                       <div class="d-flex flex-column justify-content-center">
-                               <h6 class="mb-0 ">PDF</h6>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <div class="d-flex flex-column justify-content-center">
-                                     <h6 class="mb-0 ">En circulation</h6>
-                          </div>
-                      </td>
-                       <td class="center">
-                        <button type="button" class="btn btn-warning  text-xs">Annuler </button>
-                         <button type="button" class="btn btn-primary  text-xs">Editer </button>
-                        <button type="button" class="btn btn-danger text-xs ">Retirer </button>
-
-                           </td>
-                    </tr>
-
-                     <tr>
-                                          <td>
-                                            <div class="d-flex px-2 py-1">
-                                              <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Plantes et Maladies</h6>
-                                                <p class="text-xs text-secondary mb-0">Maiga et Joseph</p>
-                                              </div>
-                                            </div>
-                                          </td>
-                                          <td>
-                                            <div class="d-flex flex-column justify-content-center">
-                                               <h6 class="mb-0 ">Santé</h6>
-                                            </div>
-                                          </td>
-                                          <td class="align-middle text-center text-sm">
-                                              <span class="badge badge-sm bg-gradient-secondary">Usagé</span>
-                                          </td>
-                                          <td class="align-middle text-center">
-                                           <div class="d-flex flex-column justify-content-center">
-                                                   <h6 class="mb-0 ">PDF</h6>
-                                            </div>
-                                          </td>
-                                          <td class="align-middle">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                         <h6 class="mb-0 ">En circulation</h6>
-                                              </div>
-                                          </td>
-                                           <td class="center">
-                                            <button type="button" class="btn btn-warning  text-xs">Annuler </button>
-                                             <button type="button" class="btn btn-primary  text-xs">Editer </button>
-                                            <button type="button" class="btn btn-danger text-xs ">Retirer </button>
-                                            </td>
-                                        </tr>
-
                   </tbody>
                 </table>
               </div>

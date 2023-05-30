@@ -1,12 +1,11 @@
 package com.projet.AppPartageRessource.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Data
@@ -23,5 +22,15 @@ public class Emprunt extends AbstractEntity{
     @JoinColumn(name = "document_id")
     private Document doc;
 
+    @PrePersist
+    protected void onCreate() {
+        super.setCreateAt(new Date());
+        super.setUpdateAt(new Date());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        super.setUpdateAt(new Date());
+    }
 
 }

@@ -1,13 +1,12 @@
 package com.projet.AppPartageRessource.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity
 @Data
@@ -21,6 +20,17 @@ public class Filiere extends AbstractEntity {
 
     @Column(name="nom")
     private String libelle;
+
+    @PrePersist
+    protected void onCreate() {
+        super.setCreateAt(new Date());
+        super.setUpdateAt(new Date());
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        super.setUpdateAt(new Date());
+    }
 
 
 }

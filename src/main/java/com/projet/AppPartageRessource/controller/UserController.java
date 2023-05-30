@@ -55,6 +55,15 @@ public class UserController {
 
         return "login";
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String deconnexion(HttpSession session, Model model){
+        userService.deconnexion((Utilisateur) session.getAttribute("loggedInUser"));
+        session.removeAttribute("loggedInUser");
+
+        return "redirect:/login";
+
+    }
     
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String checkLogin( HttpSession session,Model model ,/*RedirectAttributes rattrs,*/ @RequestParam(name="login",required = false) String login, @RequestParam(name="password",required = false) String password){

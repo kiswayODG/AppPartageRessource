@@ -13,9 +13,15 @@
   <body>
 
 <div class="login-form">
-<c:if test="${not empty errorMsg}">
-	<div class="alert alert-danger" role="alert">${errorMsg}</div>
-</c:if>
+    <div class="form-group alert-warning border-radius-2xl p-2 text-white text-center">
+
+        <c:if test="${not empty error}">
+            <div class="error-message">
+                    ${error}
+            </div>
+        </c:if>
+    </div>
+
 	
     <div class="container-fluid">
 
@@ -43,6 +49,11 @@
                          autofocus="true" required="true" placeholder="Lieu de résidence (Adresse)"/>
                    </div>
 
+            <div class="form-group   mb-3 w-25">
+                <form:input type="number" path="tel" class="form-control"
+                            autofocus="true" required="true" placeholder="Numero"/>
+            </div>
+
  <div class="form-group   mb-3 w-25">
                  <form:select path="filiere" class="form-control" placeholder="Choisir une filière" required="true">
                   <option value="">Choisir une filière</option>
@@ -54,11 +65,11 @@
  </div>
                        <div class="form-group   mb-3 w-25">
                              <form:input type="text" path="ine" class="form-control"
-                             autofocus="true" required="true" placeholder="INE (ID d'étudiant)"/>
+                             autofocus="true" required="true" placeholder="INE (ID d'étudiant - Login)"/>
                        </div>
 
                 <div class="form-group   mb-3 w-25">
-                    <form:input type="email" path="email" class="form-control" required="true" placeholder="Email (Login)"/>
+                    <form:input type="email" path="email" class="form-control" required="true" placeholder="Email"/>
                 </div>
 
 
@@ -80,6 +91,5 @@
     </div>
 
     <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
-     <script src="webjars/bootstrap/5.0.0/js/bootstrap.min.js"></script>
   </body>
 </html>
