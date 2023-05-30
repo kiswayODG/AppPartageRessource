@@ -79,4 +79,8 @@ public class UserService  {
     public Utilisateur findUserByIne(String ine){
         return uDao.findByIne(ine);
     }
+
+    public Integer findUserNumber() {
+        return uDao.findAll().size();
+    }
 }

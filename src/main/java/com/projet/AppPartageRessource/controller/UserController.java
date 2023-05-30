@@ -2,6 +2,7 @@ package com.projet.AppPartageRessource.controller;
 
 import com.projet.AppPartageRessource.model.Filiere;
 import com.projet.AppPartageRessource.model.Utilisateur;
+import com.projet.AppPartageRessource.service.DocumentService;
 import com.projet.AppPartageRessource.service.UserService;
 import com.projet.AppPartageRessource.validator.UserValidator;
 import jakarta.servlet.http.HttpSession;
@@ -20,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserValidator validator;
+
+    @Autowired
+    private DocumentService docService;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -100,6 +104,10 @@ public class UserController {
     @RequestMapping(value = "/accueil", method = RequestMethod.GET)
     public String welcome(Model model, HttpSession session ) {
         model.addAttribute("loggedInUser",session.getAttribute("loggedInUser"));
+        model.addAttribute("utilisateurTotal",userService.findUserNumber());
+        model.addAttribute("docTotal",docService.countDocTotal());
+        model.addAttribute("docEnEmprunt", docService.countDocEnEmprunt());
+        model.addAttribute("userDoc",docService.findByUser((Utilisateur)session.getAttribute("loggedInUser")));
         return "accueil";
     }
 

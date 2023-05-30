@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface DocumentDao extends JpaRepository<Document,Integer> {
 
-     List<Document> findByEtudiant(Optional<Utilisateur> user);
+     List<Document> findByEtudiant(Utilisateur user);
 
      List<Document> findByEtudiantNot(Optional<Utilisateur> id);
 
@@ -21,4 +21,6 @@ public interface DocumentDao extends JpaRepository<Document,Integer> {
      List<Document> findByEtudiantNotAndStatut(Utilisateur user, Statut statu);
 
      List<Document> findByEtudiantAndStatut(Utilisateur user, Statut statut);
+
+     List<Document> findByStatut(Statut statut);
 }

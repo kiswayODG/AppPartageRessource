@@ -74,4 +74,16 @@ public class DocumentService {
         else
             return null;
     }
+
+    public Integer countDocTotal() {
+        return docDao.findAll().size();
+    }
+
+    public Integer countDocEnEmprunt() {
+        return docDao.findByStatut(Statut.Indisponible).size();
+    }
+
+    public Integer findByUser(Utilisateur loggedInUser) {
+        return docDao.findByEtudiant(loggedInUser).size();
+    }
 }
