@@ -118,7 +118,7 @@
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+              <input type="text" id="search-input" class="form-control" placeholder="Type here...">
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -217,7 +217,7 @@
                         <th class="text-center font-weight-bolder opacity-8">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="table-body">
                   <c:forEach items="${documents}" var="doc">
                     <tr>
                       <td>
@@ -441,6 +441,7 @@
                    <div class="form-group   mb-3">
                         <form:select path="type" class="form-control mb-3" required="true">
                                <option value="">Type de document</option>
+                               <option value="">PDF</option>
                                  <c:forEach items="${typesDoc}" var="type">
                                 <option value="${type.id}">${type.libelle}</option>
                                 </c:forEach>
@@ -477,7 +478,18 @@
 
 
 
-
+    <script>
+      $(document).ready(function()
+          {
+              $('#search-input').on('keyup',function()
+              {
+                  var value = $(this).val().toLowerCase();
+                  $('#table-body tr').filter(function() {
+                      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                      });
+                      });
+                      });
+    </script>
  <script src="assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
