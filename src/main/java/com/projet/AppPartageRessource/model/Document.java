@@ -34,7 +34,7 @@ public class Document extends AbstractEntity{
     private Utilisateur etudiant;
 
     @ManyToOne
-    @JoinColumn(name = "typeId")
+    @JoinColumn(name = "idType")
     private Type type;
 
    @Enumerated(EnumType.STRING)

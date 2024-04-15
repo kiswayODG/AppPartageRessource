@@ -15,7 +15,7 @@
 <head>
   <meta charset="utf-8" />
   <link href="webjars/bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <script src="webjars/jquery/3.0.6/jquery.min.js"></script>
+  <script src="webjars/jquery/3.6.4/jquery.min.js"></script>
   <link href="webjars/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
@@ -47,20 +47,13 @@
           <div class="collapse navbar-collapse" id="navigation">
             <ul class="navbar-nav mx-auto">
 
-              <li class="nav-item">
-                <a class="nav-link me-2" href="../pages/profile.html">
-                  <i class="fa fa-user opacity-8 text-dark me-1"></i>
-                  Qui sommes nous?
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link me-2" href="../pages/sign-up.html">
+                <a class="nav-link me-2" href="/registration">
                   <i class="fas fa-user-circle opacity-8 text-dark me-1"></i>
                   S'inscrire
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-2" href="../pages/sign-in.html">
+                <a class="nav-link me-2" href="/login">
                   <i class="fas fa-key opacity-6 text-dark me-1"></i>
                   Se connecter
                 </a>
@@ -111,10 +104,7 @@
 
                   <input type="hidden" path="${_csrf.parameterpath}" value="${_csrf.token}"/>
 
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                    <label class="form-check-label" for="rememberMe">Se rappeler de moi</label>
-                  </div>
+
                   <div class="text-center">
                     <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Se connecter </button>
                   </div>
@@ -141,26 +131,7 @@
 </main>
 <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
 <footer class="footer py-5">
-  <div class="container">
 
-      <div class="col-lg-8 mx-auto text-center mb-4 mt-2">
-        <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-          <span class="text-lg fab fa-dribbble"></span>
-        </a>
-        <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-          <span class="text-lg fab fa-twitter"></span>
-        </a>
-        <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-          <span class="text-lg fab fa-instagram"></span>
-        </a>
-        <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-          <span class="text-lg fab fa-pinterest"></span>
-        </a>
-        <a href="javascript:;" target="_blank" class="text-secondary me-xl-4 me-4">
-          <span class="text-lg fab fa-github"></span>
-        </a>
-      </div>
-    </div>
     <div class="row">
       <div class="col-8 mx-auto text-center mt-1">
         <p class="mb-0 text-secondary">

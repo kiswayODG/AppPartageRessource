@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +32,11 @@ public class EmpruntService {
     public List<Emprunt> findUserDocEmprunt(Integer loggedInUser) {
         Utilisateur user = userDao.findById(loggedInUser).get();
         return empDao.findByEtudiant(user);
+    }
+    public Emprunt findEmpruntCoursByID(Integer id) {
+        
+        Optional<Emprunt> emprunt = empDao.findById(id);
+        return emprunt.get();
+        
     }
 }

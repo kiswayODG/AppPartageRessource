@@ -12,8 +12,8 @@
 
   <body>
 
-<div class="login-form">
-    <div class="form-group alert-warning border-radius-2xl p-2 text-white text-center">
+<div class="login-form  m-auto d-flex align-items-center justify-content-center ">
+    <div class="form-group alert-warning border-radius-2xl p-2 text-white  text-center">
 
         <c:if test="${not empty error}">
             <div class="error-message">
